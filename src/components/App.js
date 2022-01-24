@@ -28,8 +28,12 @@ class App extends Component {
   }
 
 
-  updatePost() {
-  
+  updatePost(id, text) {
+
+    axios.put(`https://practiceapi.devmountain.com/api/posts${id}`,{text})
+        .then(res => {
+            console.log(res.data)
+        })
   }
 
   deletePost() {
@@ -52,7 +56,12 @@ class App extends Component {
           <Compose />
           {
             posts.map((post)=>(
-              <Post key={post.id} text={post.text} date={post.date}/>
+              <Post key={post.id}
+                    text={post.text}
+                    date={post.date}
+                    updatePostFn={this.updatePost}
+                    id={post.id}
+              />
             ))
           }
           
